@@ -5,7 +5,33 @@ const router = require('./routes/authRoutes');
 const cartrouter = require('./routes/cartRoutes');
 
 const app = express();
- 
+const allowedOrigins =["ecomm-frontend-a4pq0cf62-k-vamshikrushanas-projects.vercel.app","ecomm-frontend-vert.vercel.app"]
+// {
+//     origin: function (origin, callback) {
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     credentials: true, // Allows cookies and authentication headers if needed
+// }
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        credentials: true, // Allows cookies and authentication headers
+    })
+);
+
+
+// m
+
 // middleware
 app.use(cors())
 app.use(express.json())
